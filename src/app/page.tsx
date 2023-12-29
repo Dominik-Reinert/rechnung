@@ -52,8 +52,8 @@ export default function Home() {
         <CardContent>
           <Form {...form}  >
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div>
-                <div>
+              <div className='flex gap-4'>
+                <div className='flex gap-4 flex-col'>
                   <FormField
                     control={form.control}
                     name="name"
@@ -133,7 +133,7 @@ export default function Home() {
                     )}
                   />
                 </div>
-                <div>
+                <div className='flex gap-4 flex-col'>
                   <FormField
                     control={form.control}
                     name="bankName"
@@ -189,7 +189,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <Button disabled={!isValid || !isDirty} type='submit'>Submit</Button>
+              <div className='mt-4 flex justify-end'>
+                <Button disabled={!isValid || !isDirty} type='submit'>Submit</Button></div>
             </form>
           </Form>
         </CardContent>
