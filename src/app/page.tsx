@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Card>
-        <CardHeader><CardTitle>Create invoice</CardTitle></CardHeader>
+        <CardHeader><CardTitle>Rechnung erstellen</CardTitle></CardHeader>
         <CardContent>
           <Form {...form}  >
             <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -51,7 +51,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel>Dein Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Max Mustermann" {...field} />
+                      <Input required placeholder="Max Mustermann" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -64,7 +64,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel>Straße + Hausnummer</FormLabel>
                     <FormControl>
-                      <Input placeholder="Musterstraße 4" {...field} />
+                      <Input required placeholder="Musterstraße 4" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -74,10 +74,10 @@ export default function Home() {
                 control={form.control}
                 name="postcode"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem >
                     <FormLabel>PLZ + Ort</FormLabel>
                     <FormControl>
-                      <Input placeholder="11111 Musterstadt" {...field} />
+                      <Input required placeholder="11111 Musterstadt" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -90,7 +90,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel>Land</FormLabel>
                     <FormControl>
-                      <Input placeholder="Deutschland" {...field} />
+                      <Input required placeholder="Deutschland" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
