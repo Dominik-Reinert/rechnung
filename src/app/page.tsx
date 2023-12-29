@@ -9,7 +9,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from "zod"
 
-const schema = z.object({
+const stepOneSchema = z.object({
   name: z.string().min(2, 'min 2'),
   address: z.string().min(2, 'min 2'),
   postcode: z.string().min(2, 'min 2'),
@@ -21,19 +21,47 @@ const schema = z.object({
   iban: z.string().optional(),
   bic: z.string().optional(),
 })
+type stepOneType = z.infer<typeof stepOneSchema>
 
 
+
+
+type State = { step: number } & stepOneType;
+type Action = { type: "submit-step-one" } & stepOneType;
 
 export default function Home() {
-  const onSubmit = React.useCallback((values: z.infer<typeof schema>) => {
-    alert(JSON.stringify(values));
+  const [state, dispatch] = React.useReducer((state: State, action: Action) => {
+    const { type, ...payload } = action;
+    if (action.type === "submit-step-one") {
+      return {
+        ...state,
+        ...payload,
+        step: state.step + 1
+      }
+    }
+    return state;
+  }, {
+    step: 1,
+    name: "",
+    address: "",
+    country: "",
+    postcode: "",
+    website: "",
+    bankName: "",
+    iban: "",
+    bic: "",
+    taxNumber: ""
+  })
+  const onSubmit = React.useCallback((values: stepOneType) => {
+    dispatch({ type: "submit-step-one", ...values })
   }, [])
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Card>
         <CardHeader><CardTitle>Rechnung erstellen</CardTitle></CardHeader>
         <CardContent>
-          <Step1 onSubmit={onSubmit} />
+          {state.step === 1 ? <Step1 initialValues={state} onSubmit={onSubmit} /> : null}
+          {state.step === 2 ? <Step1 initialValues={state} onSubmit={onSubmit} /> : null}
         </CardContent>
       </Card>
     </main>
@@ -41,20 +69,10 @@ export default function Home() {
 }
 
 
-function Step1({ onSubmit }: { onSubmit: (values: z.infer<typeof schema>) => void }): JSX.Element {
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      address: "",
-      country: "",
-      postcode: "",
-      website: "",
-      bankName: "",
-      iban: "",
-      bic: "",
-      taxNumber: ""
-    },
+function Step1({ initialValues, onSubmit }: { initialValues: Partial<stepOneType>, onSubmit: (values: z.infer<typeof stepOneSchema>) => void }): JSX.Element {
+  const form = useForm<stepOneType>({
+    resolver: zodResolver(stepOneSchema),
+    defaultValues: initialValues,
   })
 
   const { isDirty, isValid } = form.formState;
