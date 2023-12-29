@@ -60,6 +60,7 @@ export default function Home() {
   const onSubmitStepTwo = React.useCallback((values: stepTwoType) => {
     dispatch({ type: "submit-step-two", ...values })
   }, [])
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Card>
