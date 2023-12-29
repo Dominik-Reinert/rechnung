@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent } from '@/components/ui/popover'
@@ -103,7 +103,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Card>
-        <CardHeader><CardTitle>Rechnung erstellen</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Rechnung erstellen</CardTitle>
+          <CardDescription>
+            {state.step === 1 ? "Deine Daten" : undefined}
+            {state.step === 2 ? "Kundendaten" : undefined}
+          </CardDescription>
+        </CardHeader>
         <CardContent>
           {state.step === 1 ? <Step1 initialValues={state} onSubmit={onSubmitStepOne} /> : null}
           {state.step === 2 ? <Step2 initialValues={state} onSubmit={onSubmitStepTwo} onBackClick={onBackClick} /> : null}
