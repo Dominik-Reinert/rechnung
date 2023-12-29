@@ -15,7 +15,11 @@ const schema = z.object({
   postcode: z.string().min(2, 'min 2'),
   country: z.string().min(1, 'min 1'),
   email: z.coerce.string().email().min(5, 'min 5'),
-  website: z.coerce.string().optional()
+  website: z.coerce.string().optional(),
+  bankName: z.string().optional(),
+  iban: z.string().optional(),
+  bic: z.string().optional(),
+  taxNumber: z.string().min(2)
 })
 
 
@@ -29,7 +33,11 @@ export default function Home() {
       country: "",
       email: "",
       postcode: "",
-      website: ""
+      website: "",
+      bankName: "",
+      iban: "",
+      bic: "",
+      taxNumber: ""
     },
   })
 
@@ -44,84 +52,142 @@ export default function Home() {
         <CardContent>
           <Form {...form}  >
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Dein Name</FormLabel>
-                    <FormControl>
-                      <Input required placeholder="Max Mustermann" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Straße + Hausnummer</FormLabel>
-                    <FormControl>
-                      <Input required placeholder="Musterstraße 4" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="postcode"
-                render={({ field }) => (
-                  <FormItem >
-                    <FormLabel>PLZ + Ort</FormLabel>
-                    <FormControl>
-                      <Input required placeholder="11111 Musterstadt" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Land</FormLabel>
-                    <FormControl>
-                      <Input required placeholder="Deutschland" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="max@mustermann.de" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="website"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Webseite</FormLabel>
-                    <FormControl>
-                      <Input placeholder="mustermann.de" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div>
+                <div>
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Dein Name</FormLabel>
+                        <FormControl>
+                          <Input required placeholder="Max Mustermann" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="address"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Straße + Hausnummer</FormLabel>
+                        <FormControl>
+                          <Input required placeholder="Musterstraße 4" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="postcode"
+                    render={({ field }) => (
+                      <FormItem >
+                        <FormLabel>PLZ + Ort</FormLabel>
+                        <FormControl>
+                          <Input required placeholder="11111 Musterstadt" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="country"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Land</FormLabel>
+                        <FormControl>
+                          <Input required placeholder="Deutschland" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="max@mustermann.de" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="website"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Webseite</FormLabel>
+                        <FormControl>
+                          <Input placeholder="mustermann.de" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div>
+                  <FormField
+                    control={form.control}
+                    name="bankName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Bankname</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Max Mustermann" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="iban"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>IBAN</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Musterstraße 4" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="bic"
+                    render={({ field }) => (
+                      <FormItem >
+                        <FormLabel>BIC</FormLabel>
+                        <FormControl>
+                          <Input placeholder="11111 Musterstadt" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="taxNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Steuernummer</FormLabel>
+                        <FormControl>
+                          <Input required {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
 
               <Button disabled={!isValid || !isDirty} type='submit'>Submit</Button>
             </form>
