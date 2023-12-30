@@ -2,12 +2,18 @@
 
 import { Step4, stepFourType } from '@/components/steps/step-four-products';
 import { Step1, stepOneType } from '@/components/steps/step-one-your-data';
+import { Step3, stepThreeType } from '@/components/steps/step-three-text';
 import { Step2, stepTwoType } from '@/components/steps/step-two-client-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import React from 'react';
 
-type State = { step: number } & stepOneType & stepTwoType & stepFourType;
-type Action = { type: "back" } | { type: "submit-step-one" } & stepOneType | { type: "submit-step-two" } & stepTwoType | { type: "submit-step-four" } & stepFourType;
+type State = { step: number } & stepOneType & stepTwoType & stepThreeType & stepFourType;
+type Action =
+  | { type: "back" }
+  | { type: "submit-step-one" } & stepOneType
+  | { type: "submit-step-two" } & stepTwoType
+  | { type: "submit-step-three" } & stepThreeType
+  | { type: "submit-step-four" } & stepFourType;
 
 export default function Home() {
   const [state, dispatch] = React.useReducer((state: State, action: Action) => {
@@ -15,6 +21,7 @@ export default function Home() {
     switch (type) {
       case "submit-step-one":
       case "submit-step-two":
+      case "submit-step-three":
       case "submit-step-four":
         return {
           ...state,
@@ -50,6 +57,10 @@ export default function Home() {
     subject: "",
     reference: "",
 
+    text: `Sehr geehrte Damen und Herren,
+vielen Dank für Ihren Auftrag und das damit verbundene Vertrauen!
+Hiermit stelle ich Ihnen die folgenden Leistungen in Rechnung:`,
+
     positions: []
   })
 
@@ -67,6 +78,7 @@ export default function Home() {
         <CardContent>
           {state.step === 1 ? <Step1 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-one", ...values })} /> : null}
           {state.step === 2 ? <Step2 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-two", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
+          {state.step === 3 ? <Step3 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-three", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
           {state.step === 4 ? <Step4 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-four", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
         </CardContent>
       </Card>
