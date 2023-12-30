@@ -55,7 +55,7 @@ export default function Home() {
     clientAddress: "",
     clientPostcode: "",
     subject: "",
-    reference: "",
+    taxnumber: "",
 
     text: `Sehr geehrte Damen und Herren,
 vielen Dank für Ihren Auftrag und das damit verbundene Vertrauen!
@@ -76,10 +76,10 @@ Hiermit stelle ich Ihnen die folgenden Leistungen in Rechnung:`,
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {state.step === 1 ? <Step1 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-one", ...values })} /> : null}
+          {state.step === 10 ? <Step1 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-one", ...values })} /> : null}
           {state.step === 2 ? <Step2 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-two", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
           {state.step === 3 ? <Step3 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-three", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
-          {state.step === 4 ? <Step4 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-four", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
+          {state.step === 1 ? <Step4 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-four", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
         </CardContent>
       </Card>
     </main>

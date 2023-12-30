@@ -18,11 +18,11 @@ const stepTwoSchema = z.object({
     billNumber: z.string().min(1, 'min 1'),
     billDate: z.date(),
     deliveryDate: z.date(),
+    taxnumber: z.string(),
     billDueDate: z.date().optional(),
     clientAddress: z.string().optional(),
     clientPostcode: z.string().optional(),
     subject: z.string().optional(),
-    reference: z.string().optional(),
 })
 export type stepTwoType = z.infer<typeof stepTwoSchema>
 
@@ -200,7 +200,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                         />
                         <FormField
                             control={form.control}
-                            name="reference"
+                            name="taxnumber"
                             render={({ field }) => (
                                 <FormItem className='w-full' >
                                     <FormLabel>Steuernummer</FormLabel>
