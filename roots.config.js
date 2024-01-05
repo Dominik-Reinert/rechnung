@@ -5,5 +5,5 @@ module.exports = {
   localizedDir: path.resolve(__dirname, 'src/app/(routes)'),
   locales: ['en', 'de'],
   defaultLocale: 'en',
-  prefixDefaultLocale: false, // serves "en" locale on / instead of /en
+  prefixDefaultLocale: true, // serves "en" locale on / instead of /en
 }
