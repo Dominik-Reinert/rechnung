@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 export default function Home() {
   const t = useTranslations('home');
   return <main className="flex flex-col justify-between h-[99svh]">
-    <header className="flex flex-row w-full justify-between p-6 text-gray-900 font-bold">
-      <span>Finya</span>
+    <header className="flex flex-row w-full justify-between p-6 text-gray-900 font-bold align-baseline">
+      <span className="text-xl md:text-2xl leading-normal">Finya</span>
       <div>
         <Button>{t('createButtonLabel')}</Button>
       </div>
