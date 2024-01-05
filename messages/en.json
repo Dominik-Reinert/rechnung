@@ -1,5 +1,10 @@
 {
     "Index": {
         "title": "Hello world!"
+    },
+    "home": {
+        "createButtonLabel": "Create",
+        "title": "Easily create invoices",
+        "subTitle": "Start now, register later"
     }
 }

@@ -1,5 +1,10 @@
 {
     "index": {
         "title": "Hallo Welt!"
+    },
+    "home": {
+        "createButtonLabel": "Erstellen",
+        "title": "Erstelle einfach Rechnungen",
+        "subTitle": "Starte jetzt, registriere dich später"
     }
 }
