@@ -81,11 +81,11 @@
     }
 
     h1 {
-        @apply text-4xl md:text-5xl font-bold leading-tight mb-4 text-gray-900;
+        @apply text-4xl md:text-5xl font-bold leading-tight mb-4 text-gray-900  tracking-tighter;
     }
 
     h2 {
-        @apply text-3xl md:text-4xl font-semibold leading-snug mb-3 text-gray-800;
+        @apply text-3xl md:text-4xl font-semibold leading-snug mb-3 text-gray-800  tracking-tight;
     }
 
     h3 {
