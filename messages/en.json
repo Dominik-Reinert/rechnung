@@ -3,7 +3,8 @@
         "title": "Hello world!"
     },
     "layout": {
-        "imprint": "Imprint"
+        "imprint": "Imprint",
+        "dataPrivacy": "Data privacy"
     },
     "home": {
         "createButtonLabel": "Create",

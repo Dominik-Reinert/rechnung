@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { router } from '@/lib/roots-router'
 
 const inter = Inter({ subsets: ['latin'], variable: "--font-sans" })
 
@@ -28,12 +30,8 @@ export default function RootLayout({
         )}>
         <main className="flex flex-col justify-between h-[99svh]"><>{children}</>
           <footer className="flex gap-6 bg-black text-white p-6">
-            <div>
-              <p>{t("imprint")}</p>
-            </div>
-            <div>
-              <p>{t("imprint")}</p>
-            </div>
+            <Link href={router.getHref('/imprint', { locale: "de" })}>{t("imprint")}</Link>
+            <Link href={router.getHref('/data-privacy')}>{t("dataPrivacy")}</Link>
           </footer>
         </main>
       </body>

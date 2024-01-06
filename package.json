@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "roots": "next-roots",
-        "dev": "yarn roots; next dev",
+        "dev": "yarn roots;   next dev",
         "build": "yarn roots; next build",
         "start": "next start",
         "lint": "next lint"
