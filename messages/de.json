@@ -2,6 +2,9 @@
     "index": {
         "title": "Hallo Welt!"
     },
+    "layout": {
+        "imprint": "Impressum"
+    },
     "home": {
         "createButtonLabel": "Erstellen",
         "title": "Erstelle einfach Rechnungen",

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
+import { useTranslations } from 'next-intl'
 
 const inter = Inter({ subsets: ['latin'], variable: "--font-sans" })
 
@@ -16,6 +17,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const t = useTranslations('layout');
   return (
     <html lang="en">
       <head />
@@ -23,7 +25,18 @@ export default function RootLayout({
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           inter.variable
-        )}>{children}</body>
+        )}>
+        <main className="flex flex-col justify-between h-[99svh]"><>{children}</>
+          <footer className="flex gap-6 bg-black text-white p-6">
+            <div>
+              <p>{t("imprint")}</p>
+            </div>
+            <div>
+              <p>{t("imprint")}</p>
+            </div>
+          </footer>
+        </main>
+      </body>
     </html>
   )
 }

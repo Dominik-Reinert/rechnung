@@ -3,9 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
         "roots": "next-roots",
-        "build": "next-roots next build",
+        "dev": "yarn roots; next dev",
+        "build": "yarn roots; next build",
         "start": "next start",
         "lint": "next lint"
     },

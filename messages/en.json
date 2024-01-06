@@ -2,6 +2,9 @@
     "Index": {
         "title": "Hello world!"
     },
+    "layout": {
+        "imprint": "Imprint"
+    },
     "home": {
         "createButtonLabel": "Create",
         "title": "Easily create invoices",
