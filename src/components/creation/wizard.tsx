@@ -5,7 +5,7 @@ import React from 'react';
 import { Step1, stepOneType } from './step-one-your-data';
 import { Step2, stepTwoType } from './step-two-client-data';
 import { Step3, stepThreeType } from './step-three-text';
-import { Step4, stepFourType } from './step-four-products';
+import { Step4, StepFourMessages, stepFourType } from './step-four-products';
 import { useTranslations } from 'next-intl';
 
 type State = { step: number } & stepOneType & stepTwoType & stepThreeType & stepFourType;
@@ -15,8 +15,9 @@ type Action =
     | { type: "submit-step-two" } & stepTwoType
     | { type: "submit-step-three" } & stepThreeType
     | { type: "submit-step-four" } & stepFourType;
+export type CreateWizardMessages = { stepFourMessages: StepFourMessages }
 
-export function CreationWizard(): React.JSX.Element {
+export function CreationWizard({ stepFourMessages }: CreateWizardMessages): React.JSX.Element {
     const [state, dispatch] = React.useReducer((state: State, action: Action) => {
         const { type, ...payload } = action;
         switch (type) {
@@ -77,10 +78,34 @@ export function CreationWizard(): React.JSX.Element {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {state.step === 10 ? <Step1 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-one", ...values })} /> : null}
-                    {state.step === 2 ? <Step2 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-two", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
-                    {state.step === 3 ? <Step3 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-three", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
-                    {state.step === 1 ? <Step4 initialValues={state} onSubmit={(values) => dispatch({ type: "submit-step-four", ...values })} onBackClick={() => dispatch({ type: "back" })} /> : null}
+                    {state.step === 1 ?
+                        <Step1
+                            initialValues={state}
+                            onSubmit={(values) => dispatch({ type: "submit-step-one", ...values })}
+                        />
+                        : null}
+                    {state.step === 2 ?
+                        <Step2
+                            initialValues={state}
+                            onSubmit={(values) => dispatch({ type: "submit-step-two", ...values })}
+                            onBackClick={() => dispatch({ type: "back" })}
+                        />
+                        : null}
+                    {state.step === 3 ?
+                        <Step3
+                            initialValues={state}
+                            onSubmit={(values) => dispatch({ type: "submit-step-three", ...values })}
+                            onBackClick={() => dispatch({ type: "back" })}
+                        />
+                        : null}
+                    {state.step === 4 ?
+                        <Step4
+                            initialValues={state}
+                            onSubmit={(values) => dispatch({ type: "submit-step-four", ...values })}
+                            onBackClick={() => dispatch({ type: "back" })}
+                            messages={stepFourMessages}
+                        />
+                        : null}
                 </CardContent>
             </Card>
         </main>

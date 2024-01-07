@@ -20,7 +20,20 @@ const positionSchema = z.object({
 
 const stepFourSchema = z.object({ positions: z.array(positionSchema) })
 export type stepFourType = z.infer<typeof stepFourSchema>
-export type StepFourMessages = {}
+export type StepFourMessages = {
+    labels: {
+        position: string;
+        amount: string;
+        unit: string;
+        netPrice: string;
+        grossPrice: string;
+        currency: string;
+        taxPercent: string;
+        discountPercent: string;
+    }
+    back: string;
+    next: string;
+}
 
 interface Step4Props {
     initialValues: Partial<stepFourType>,
@@ -30,8 +43,7 @@ interface Step4Props {
 }
 
 
-// eslint-disable-next-line no-unused-vars
-export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): React.JSX.Element {
+export function Step4({ initialValues, messages: { labels, next, back }, onSubmit, onBackClick }: Step4Props): React.JSX.Element {
     const form = useForm<stepFourType>({
         resolver: zodResolver(stepFourSchema),
         defaultValues: initialValues,
@@ -59,7 +71,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                 name={`positions.${0}.name`}
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Position</FormLabel>
+                        <FormLabel>{labels.position}</FormLabel>
                         <FormControl>
                             <Input required placeholder="Produkt eins" {...field} />
                         </FormControl>
@@ -73,7 +85,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                     name={`positions.${0}.amount`}
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Anzahl/Menge</FormLabel>
+                            <FormLabel>{labels.amount}</FormLabel>
                             <FormControl>
                                 <Input required placeholder="1" {...field} />
                             </FormControl>
@@ -86,7 +98,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                     name={`positions.${0}.unit`}
                     render={({ field }) => (
                         <FormItem >
-                            <FormLabel>Einheit</FormLabel>
+                            <FormLabel>{labels.unit}</FormLabel>
                             <FormControl>
                                 <Input required placeholder="Stück" {...field} />
                             </FormControl>
@@ -102,7 +114,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                     name={`positions.${0}.price`}
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Nettopreis</FormLabel>
+                            <FormLabel>{labels.netPrice}</FormLabel>
                             <FormControl>
                                 <Input required placeholder="100" {...field} />
                             </FormControl>
@@ -115,7 +127,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                     name={`positions.${0}.currency`}
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Währung</FormLabel>
+                            <FormLabel>{labels.currency}</FormLabel>
                             <FormControl>
                                 <Input required placeholder="€" {...field} />
                             </FormControl>
@@ -131,7 +143,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                     name={`positions.${0}.tax`}
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Steuersatz (%)</FormLabel>
+                            <FormLabel>{labels.taxPercent}</FormLabel>
                             <FormControl>
                                 <Input required placeholder="19" {...field} />
                             </FormControl>
@@ -144,7 +156,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                     name={`positions.${0}.discount`}
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Rabatt (%)</FormLabel>
+                            <FormLabel>{labels.discountPercent}</FormLabel>
                             <FormControl>
                                 <Input placeholder="10" {...field} />
                             </FormControl>
@@ -159,7 +171,7 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
                 name={`positions.${0}.result`}
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Bruttopreis</FormLabel>
+                        <FormLabel>{labels.grossPrice}</FormLabel>
                         <FormControl>
                             <Input {...field} disabled />
                         </FormControl>
@@ -169,8 +181,8 @@ export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): Rea
             />
 
             <div className='mt-4 flex justify-end gap-4'>
-                <Button variant="outline" type='button' onClick={onBackClick}>Back</Button>
-                <Button disabled={!isValid} type='submit'>Next</Button>
+                <Button variant="outline" type='button' onClick={onBackClick}>{back}</Button>
+                <Button disabled={!isValid} type='submit'>{next}</Button>
             </div>
         </form>
     </Form >
