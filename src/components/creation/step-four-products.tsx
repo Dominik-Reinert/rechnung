@@ -20,10 +20,18 @@ const positionSchema = z.object({
 
 const stepFourSchema = z.object({ positions: z.array(positionSchema) })
 export type stepFourType = z.infer<typeof stepFourSchema>
+export type StepFourMessages = {}
+
+interface Step4Props {
+    initialValues: Partial<stepFourType>,
+    messages: StepFourMessages
+    onSubmit: (values: stepFourType) => void,
+    onBackClick: () => void
+}
 
 
 // eslint-disable-next-line no-unused-vars
-export function Step4({ initialValues, onSubmit, onBackClick }: { initialValues: Partial<stepFourType>, onSubmit: (values: stepFourType) => void, onBackClick: () => void }): React.JSX.Element {
+export function Step4({ initialValues, onSubmit, onBackClick }: Step4Props): React.JSX.Element {
     const form = useForm<stepFourType>({
         resolver: zodResolver(stepFourSchema),
         defaultValues: initialValues,
