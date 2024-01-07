@@ -21,7 +21,7 @@ const stepOneSchema = z.object({
 })
 export type stepOneType = z.infer<typeof stepOneSchema>
 
-export function Step1({ initialValues, onSubmit }: { initialValues: Partial<stepOneType>, onSubmit: (values: stepOneType) => void }): JSX.Element {
+export function Step1({ initialValues, onSubmit }: { initialValues: Partial<stepOneType>, onSubmit: (values: stepOneType) => void }): React.JSX.Element {
     const form = useForm<stepOneType>({
         resolver: zodResolver(stepOneSchema),
         defaultValues: initialValues,

@@ -6,6 +6,7 @@ import { Step1, stepOneType } from './step-one-your-data';
 import { Step2, stepTwoType } from './step-two-client-data';
 import { Step3, stepThreeType } from './step-three-text';
 import { Step4, stepFourType } from './step-four-products';
+import { useTranslations } from 'next-intl';
 
 type State = { step: number } & stepOneType & stepTwoType & stepThreeType & stepFourType;
 type Action =
@@ -15,7 +16,7 @@ type Action =
     | { type: "submit-step-three" } & stepThreeType
     | { type: "submit-step-four" } & stepFourType;
 
-export function CreationWizard(): JSX.Element {
+export function CreationWizard(): React.JSX.Element {
     const [state, dispatch] = React.useReducer((state: State, action: Action) => {
         const { type, ...payload } = action;
         switch (type) {

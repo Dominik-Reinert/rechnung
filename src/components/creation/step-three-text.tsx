@@ -14,7 +14,7 @@ const stepThreeSchema = z.object({
 export type stepThreeType = z.infer<typeof stepThreeSchema>
 
 
-export function Step3({ initialValues, onSubmit, onBackClick }: { initialValues: Partial<stepThreeType>, onSubmit: (values: stepThreeType) => void, onBackClick: () => void }): JSX.Element {
+export function Step3({ initialValues, onSubmit, onBackClick }: { initialValues: Partial<stepThreeType>, onSubmit: (values: stepThreeType) => void, onBackClick: () => void }): React.JSX.Element {
     const form = useForm<stepThreeType>({
         resolver: zodResolver(stepThreeSchema),
         defaultValues: initialValues,

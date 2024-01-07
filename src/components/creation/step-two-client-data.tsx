@@ -27,7 +27,7 @@ const stepTwoSchema = z.object({
 export type stepTwoType = z.infer<typeof stepTwoSchema>
 
 
-export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues: Partial<stepTwoType>, onSubmit: (values: stepTwoType) => void, onBackClick: () => void }): JSX.Element {
+export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues: Partial<stepTwoType>, onSubmit: (values: stepTwoType) => void, onBackClick: () => void }): React.JSX.Element {
     const form = useForm<stepTwoType>({
         resolver: zodResolver(stepTwoSchema),
         defaultValues: initialValues,
