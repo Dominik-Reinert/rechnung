@@ -2,6 +2,10 @@
     "index": {
         "title": "Hallo Welt!"
     },
+    "base": {
+        "next": "Weiter",
+        "back": "Zurück"
+    },
     "layout": {
         "imprint": "Impressum",
         "dataPrivacy": "Datenschutz"
@@ -10,5 +14,24 @@
         "createButtonLabel": "Erstellen",
         "title": "Erstelle einfach Rechnungen",
         "subTitle": "Starte jetzt, registriere dich später"
+    },
+    "wizard": {
+        "title": "Rechnung erstellen",
+        "subTitle": {
+            "stepOne": "Deine Daten",
+            "stepTwo": "Kundendaten",
+            "stepThree": "",
+            "stepFour": "Positionen"
+        },
+        "name": "Dein Name",
+        "street": "Straße & Hausnummer",
+        "bank": "Name der Bank",
+        "IBAN": "IBAN",
+        "zip": "PLZ & Ort",
+        "BIC": "BIC",
+        "country": "Land",
+        "taxNumber": "Steuernummer",
+        "email": "Email",
+        "website": "Webseite"
     }
 }

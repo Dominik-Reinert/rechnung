@@ -2,6 +2,10 @@
     "Index": {
         "title": "Hello world!"
     },
+    "base": {
+        "next": "Next",
+        "back": "Back"
+    },
     "layout": {
         "imprint": "Imprint",
         "dataPrivacy": "Data privacy"
@@ -10,5 +14,24 @@
         "createButtonLabel": "Create",
         "title": "Easily create invoices",
         "subTitle": "Start now, register later"
+    },
+    "wizard": {
+        "title": "Invoice creation",
+        "subTitle": {
+            "stepOne": "Your data",
+            "stepTwo": "Customer data",
+            "stepThree": "",
+            "stepFour": "Positions"
+        },
+        "name": "Your name",
+        "street": "Street & house",
+        "bank": "Name of your bank",
+        "IBAN": "IBAN",
+        "zip": "Zip & city",
+        "BIC": "BIC",
+        "country": "Country",
+        "taxNumber": "Tax number",
+        "email": "Email",
+        "website": "Website"
     }
 }

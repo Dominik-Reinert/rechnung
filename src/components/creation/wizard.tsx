@@ -2,11 +2,10 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import React from 'react';
-import { Step1, stepOneType } from './step-one-your-data';
+import { Step1, StepOneMessages, stepOneType } from './step-one-your-data';
 import { Step2, stepTwoType } from './step-two-client-data';
 import { Step3, stepThreeType } from './step-three-text';
 import { Step4, StepFourMessages, stepFourType } from './step-four-products';
-import { useTranslations } from 'next-intl';
 
 type State = { step: number } & stepOneType & stepTwoType & stepThreeType & stepFourType;
 type Action =
@@ -15,9 +14,14 @@ type Action =
     | { type: "submit-step-two" } & stepTwoType
     | { type: "submit-step-three" } & stepThreeType
     | { type: "submit-step-four" } & stepFourType;
-export type CreateWizardMessages = { stepFourMessages: StepFourMessages }
 
-export function CreationWizard({ stepFourMessages }: CreateWizardMessages): React.JSX.Element {
+export type CreateWizardMessages = {
+    title: string;
+    stepOneMessages: StepOneMessages;
+    stepFourMessages: StepFourMessages;
+}
+
+export function CreationWizard({ title, stepOneMessages, stepFourMessages }: CreateWizardMessages): React.JSX.Element {
     const [state, dispatch] = React.useReducer((state: State, action: Action) => {
         const { type, ...payload } = action;
         switch (type) {
@@ -71,10 +75,12 @@ export function CreationWizard({ stepFourMessages }: CreateWizardMessages): Reac
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <Card>
                 <CardHeader>
-                    <CardTitle>Rechnung erstellen</CardTitle>
+                    <CardTitle>{title}</CardTitle>
                     <CardDescription>
-                        {state.step === 1 ? "Deine Daten" : undefined}
+                        {state.step === 1 ? stepOneMessages.subTitle : undefined}
                         {state.step === 2 ? "Kundendaten" : undefined}
+                        {state.step === 3 ? "Kundendaten" : undefined}
+                        {state.step === 4 ? stepFourMessages.subTitle : undefined}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -82,6 +88,7 @@ export function CreationWizard({ stepFourMessages }: CreateWizardMessages): Reac
                         <Step1
                             initialValues={state}
                             onSubmit={(values) => dispatch({ type: "submit-step-one", ...values })}
+                            messages={stepOneMessages}
                         />
                         : null}
                     {state.step === 2 ?

@@ -31,6 +31,7 @@ export type StepFourMessages = {
         taxPercent: string;
         discountPercent: string;
     }
+    subTitle: string;
     back: string;
     next: string;
 }
@@ -41,7 +42,6 @@ interface Step4Props {
     onSubmit: (values: stepFourType) => void,
     onBackClick: () => void
 }
-
 
 export function Step4({ initialValues, messages: { labels, next, back }, onSubmit, onBackClick }: Step4Props): React.JSX.Element {
     const form = useForm<stepFourType>({

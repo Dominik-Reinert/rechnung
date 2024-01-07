@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from "zod"
 
@@ -20,8 +21,30 @@ const stepOneSchema = z.object({
     bic: z.string().optional(),
 })
 export type stepOneType = z.infer<typeof stepOneSchema>
+export type StepOneMessages = {
+    labels: {
+        name: string;
+        street: string;
+        bank: string;
+        IBAN: string;
+        zip: string;
+        BIC: string;
+        country: string;
+        taxNumber: string;
+        email: string;
+        website: string;
+    }
+    subTitle: string;
+    next: string;
+}
 
-export function Step1({ initialValues, onSubmit }: { initialValues: Partial<stepOneType>, onSubmit: (values: stepOneType) => void }): React.JSX.Element {
+interface StepOneProps {
+    initialValues: Partial<stepOneType>;
+    messages: StepOneMessages;
+    onSubmit: (values: stepOneType) => void;
+}
+
+export function Step1({ initialValues, messages: { labels, next }, onSubmit }: StepOneProps): React.JSX.Element {
     const form = useForm<stepOneType>({
         resolver: zodResolver(stepOneSchema),
         defaultValues: initialValues,
@@ -37,7 +60,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Dein Name</FormLabel>
+                                <FormLabel>{labels.name}</FormLabel>
                                 <FormControl>
                                     <Input required placeholder="Max Mustermann" {...field} />
                                 </FormControl>
@@ -50,7 +73,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="address"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Straße + Hausnummer</FormLabel>
+                                <FormLabel>{labels.street}</FormLabel>
                                 <FormControl>
                                     <Input required placeholder="Musterstraße 4" {...field} />
                                 </FormControl>
@@ -63,7 +86,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="postcode"
                         render={({ field }) => (
                             <FormItem >
-                                <FormLabel>PLZ + Ort</FormLabel>
+                                <FormLabel>{labels.zip}</FormLabel>
                                 <FormControl>
                                     <Input required placeholder="11111 Musterstadt" {...field} />
                                 </FormControl>
@@ -76,7 +99,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="country"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Land</FormLabel>
+                                <FormLabel>{labels.country}</FormLabel>
                                 <FormControl>
                                     <Input required placeholder="Deutschland" {...field} />
                                 </FormControl>
@@ -89,7 +112,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>{labels.email}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="max@mustermann.de" {...field} />
                                 </FormControl>
@@ -102,7 +125,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="website"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Webseite</FormLabel>
+                                <FormLabel>{labels.website}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="mustermann.de" {...field} />
                                 </FormControl>
@@ -117,7 +140,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="bankName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Bankname</FormLabel>
+                                <FormLabel>{labels.bank}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Max Mustermann" {...field} />
                                 </FormControl>
@@ -130,7 +153,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="iban"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>IBAN</FormLabel>
+                                <FormLabel>{labels.IBAN}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Musterstraße 4" {...field} />
                                 </FormControl>
@@ -143,7 +166,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="bic"
                         render={({ field }) => (
                             <FormItem >
-                                <FormLabel>BIC</FormLabel>
+                                <FormLabel>{labels.BIC}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="11111 Musterstadt" {...field} />
                                 </FormControl>
@@ -156,7 +179,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
                         name="taxNumber"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Steuernummer</FormLabel>
+                                <FormLabel>{labels.taxNumber}</FormLabel>
                                 <FormControl>
                                     <Input required {...field} />
                                 </FormControl>
@@ -168,7 +191,7 @@ export function Step1({ initialValues, onSubmit }: { initialValues: Partial<step
             </div>
 
             <div className='mt-4 flex justify-end'>
-                <Button disabled={!isValid} type='submit'>Next</Button></div>
+                <Button disabled={!isValid} type='submit'>{next}</Button></div>
         </form>
     </Form>
 }
