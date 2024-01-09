@@ -8,6 +8,7 @@ import { Popover, PopoverContent } from '@/components/ui/popover'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PopoverTrigger } from '@radix-ui/react-popover'
 import { format } from 'date-fns'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from "zod"
 
@@ -25,9 +26,33 @@ const stepTwoSchema = z.object({
     subject: z.string().optional(),
 })
 export type stepTwoType = z.infer<typeof stepTwoSchema>
+export type StepTwoMessages = {
+    labels: {
+        clientName: string;
+        clientAddress: string;
+        clientPostcode: string;
+        clientCountry: string;
+        subject: string;
+        billNumber: string;
+        billDate: string;
+        billDueDate: string;
+        deliveryDate: string;
+        taxnumber: string;
+    }
+    subTitle: string;
+    back: string;
+    next: string;
+}
+
+interface StepTwoProps {
+    initialValues: Partial<stepTwoType>;
+    messages: StepTwoMessages;
+    onSubmit: (values: stepTwoType) => void;
+    onBackClick: () => void;
+}
 
 
-export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues: Partial<stepTwoType>, onSubmit: (values: stepTwoType) => void, onBackClick: () => void }): React.JSX.Element {
+export function Step2({ initialValues, messages: { labels, next, back }, onSubmit, onBackClick }: StepTwoProps): React.JSX.Element {
     const form = useForm<stepTwoType>({
         resolver: zodResolver(stepTwoSchema),
         defaultValues: initialValues,
@@ -43,7 +68,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                         name="clientName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Name des Kunden</FormLabel>
+                                <FormLabel>{labels.clientName}</FormLabel>
                                 <FormControl>
                                     <Input required placeholder="Max Mustermann" {...field} />
                                 </FormControl>
@@ -56,7 +81,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                         name="clientAddress"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Straße + Hausnummer</FormLabel>
+                                <FormLabel>{labels.clientAddress}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Musterstraße 4" {...field} />
                                 </FormControl>
@@ -69,7 +94,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                         name="clientPostcode"
                         render={({ field }) => (
                             <FormItem >
-                                <FormLabel>PLZ + Ort</FormLabel>
+                                <FormLabel>{labels.clientPostcode}</FormLabel>
                                 <FormControl>
                                     <Input placeholder="11111 Musterstadt" {...field} />
                                 </FormControl>
@@ -82,7 +107,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                         name="clientCountry"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Land</FormLabel>
+                                <FormLabel>{labels.clientCountry}</FormLabel>
                                 <FormControl>
                                     <Input required placeholder="Deutschland" {...field} />
                                 </FormControl>
@@ -98,7 +123,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                             name="subject"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Betreff</FormLabel>
+                                    <FormLabel>{labels.subject}</FormLabel>
                                     <FormControl>
                                         <Input required placeholder="Max Mustermann" {...field} />
                                     </FormControl>
@@ -111,7 +136,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                             name="billNumber"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Rechnungsnummer</FormLabel>
+                                    <FormLabel>{labels.billNumber}</FormLabel>
                                     <FormControl>
                                         <Input required placeholder="Musterstraße 4" {...field} />
                                     </FormControl>
@@ -126,7 +151,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                             name="billDate"
                             render={({ field }) => (
                                 <FormItem className='w-full' >
-                                    <FormLabel>Rechnungsdatum</FormLabel>
+                                    <FormLabel>{labels.billDate}</FormLabel>
                                     <FormControl>
                                         <Popover>
                                             <PopoverTrigger asChild>
@@ -151,7 +176,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                             name="billDueDate"
                             render={({ field }) => (
                                 <FormItem className='w-full' >
-                                    <FormLabel>Zahlungsziel</FormLabel>
+                                    <FormLabel>{labels.billDueDate}</FormLabel>
                                     <FormControl>
                                         <Popover>
                                             <PopoverTrigger asChild>
@@ -178,7 +203,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                             name="deliveryDate"
                             render={({ field }) => (
                                 <FormItem className='w-full' >
-                                    <FormLabel>Lieferdatum</FormLabel>
+                                    <FormLabel>{labels.deliveryDate}</FormLabel>
                                     <FormControl>
                                         <Popover>
                                             <PopoverTrigger asChild>
@@ -203,7 +228,7 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
                             name="taxnumber"
                             render={({ field }) => (
                                 <FormItem className='w-full' >
-                                    <FormLabel>Steuernummer</FormLabel>
+                                    <FormLabel>{labels.taxnumber}</FormLabel>
                                     <FormControl>
                                         <Input required {...field} />
                                     </FormControl>
@@ -216,8 +241,8 @@ export function Step2({ initialValues, onSubmit, onBackClick }: { initialValues:
             </div>
 
             <div className='mt-4 flex justify-end gap-4'>
-                <Button variant="outline" type='button' onClick={onBackClick}>Back</Button>
-                <Button disabled={!isValid} type='submit'>Next</Button>
+                <Button variant="outline" type='button' onClick={onBackClick}>{back}</Button>
+                <Button disabled={!isValid} type='submit'>{next}</Button>
             </div>
         </form>
     </Form >

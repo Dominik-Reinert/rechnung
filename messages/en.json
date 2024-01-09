@@ -32,6 +32,16 @@
         "country": "Country",
         "taxNumber": "Tax number",
         "email": "Email",
-        "website": "Website"
+        "website": "Website",
+        "clientName": "Name",
+        "clientAddress": "Street & house",
+        "clientPostcode": "Zip & city",
+        "clientCountry": "Country",
+        "subject": "Subject",
+        "billNumber": "Bill number",
+        "billDate": "Bill date",
+        "billDueDate": "Due date",
+        "deliveryDate": "Delivery date",
+        "taxnumber": "Tax number"
     }
 }

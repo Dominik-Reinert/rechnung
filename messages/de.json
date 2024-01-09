@@ -32,6 +32,16 @@
         "country": "Land",
         "taxNumber": "Steuernummer",
         "email": "Email",
-        "website": "Webseite"
+        "website": "Webseite",
+        "clientName": "Name",
+        "clientAddress": "Straße & Hausnummer",
+        "clientPostcode": "PLZ + Ort",
+        "clientCountry": "Land",
+        "subject": "Betreff",
+        "billNumber": "Rechnungsnummer",
+        "billDate": "Rechnungsdatum",
+        "billDueDate": "Zahlungsziel",
+        "deliveryDate": "Lieferdatum",
+        "taxnumber": "Steuernummer"
     }
 }

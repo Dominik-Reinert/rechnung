@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import React from 'react';
 import { Step1, StepOneMessages, stepOneType } from './step-one-your-data';
-import { Step2, stepTwoType } from './step-two-client-data';
+import { Step2, StepTwoMessages, stepTwoType } from './step-two-client-data';
 import { Step3, stepThreeType } from './step-three-text';
 import { Step4, StepFourMessages, stepFourType } from './step-four-products';
 
@@ -18,10 +18,11 @@ type Action =
 export type CreateWizardMessages = {
     title: string;
     stepOneMessages: StepOneMessages;
+    stepTwoMessages: StepTwoMessages;
     stepFourMessages: StepFourMessages;
 }
 
-export function CreationWizard({ title, stepOneMessages, stepFourMessages }: CreateWizardMessages): React.JSX.Element {
+export function CreationWizard({ title, stepOneMessages, stepTwoMessages, stepFourMessages }: CreateWizardMessages): React.JSX.Element {
     const [state, dispatch] = React.useReducer((state: State, action: Action) => {
         const { type, ...payload } = action;
         switch (type) {
@@ -72,13 +73,13 @@ export function CreationWizard({ title, stepOneMessages, stepFourMessages }: Cre
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div className="flex flex-col items-center justify-between p-24">
             <Card>
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
                     <CardDescription>
                         {state.step === 1 ? stepOneMessages.subTitle : undefined}
-                        {state.step === 2 ? "Kundendaten" : undefined}
+                        {state.step === 2 ? stepTwoMessages.subTitle : undefined}
                         {state.step === 3 ? "Kundendaten" : undefined}
                         {state.step === 4 ? stepFourMessages.subTitle : undefined}
                     </CardDescription>
@@ -96,6 +97,7 @@ export function CreationWizard({ title, stepOneMessages, stepFourMessages }: Cre
                             initialValues={state}
                             onSubmit={(values) => dispatch({ type: "submit-step-two", ...values })}
                             onBackClick={() => dispatch({ type: "back" })}
+                            messages={stepTwoMessages}
                         />
                         : null}
                     {state.step === 3 ?
@@ -115,6 +117,6 @@ export function CreationWizard({ title, stepOneMessages, stepFourMessages }: Cre
                         : null}
                 </CardContent>
             </Card>
-        </main>
+        </div>
     )
 }

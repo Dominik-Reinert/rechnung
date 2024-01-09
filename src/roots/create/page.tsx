@@ -22,6 +22,23 @@ export default function Home() {
       subTitle: wizardT("subTitle.stepOne"),
       next: baseT("next")
     }}
+    stepTwoMessages={{
+      labels: {
+        clientName: wizardT('clientName'),
+        clientAddress: wizardT('clientAddress'),
+        clientPostcode: wizardT('clientPostcode'),
+        clientCountry: wizardT('clientCountry'),
+        subject: wizardT('subject'),
+        billNumber: wizardT('billNumber'),
+        billDate: wizardT('billDate'),
+        billDueDate: wizardT('billDueDate'),
+        deliveryDate: wizardT('deliveryDate'),
+        taxnumber: wizardT('taxnumber')
+      },
+      subTitle: wizardT("subTitle.stepTwo"),
+      next: baseT("next"),
+      back: baseT("back"),
+    }}
     stepFourMessages={{
       labels: {
         position: wizardT("position"),
