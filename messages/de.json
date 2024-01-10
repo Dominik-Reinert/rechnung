@@ -42,6 +42,14 @@
         "billDate": "Rechnungsdatum",
         "billDueDate": "Zahlungsziel",
         "deliveryDate": "Lieferdatum",
-        "taxnumber": "Steuernummer"
+        "taxnumber": "Steuernummer",
+        "position": "Position",
+        "amount": "Stückzahl",
+        "unit": "Einheit",
+        "netPrice": "Nettopreis",
+        "currency": "Währung",
+        "taxPercent": "Steuer (%)",
+        "discountPercent": "Rabatt (%)",
+        "grossPrice": "Brottopreis"
     }
 }

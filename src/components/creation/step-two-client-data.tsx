@@ -70,7 +70,7 @@ export function Step2({ initialValues, messages: { labels, next, back }, onSubmi
                             <FormItem>
                                 <FormLabel>{labels.clientName}</FormLabel>
                                 <FormControl>
-                                    <Input required placeholder="Max Mustermann" {...field} />
+                                    <Input required  {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -83,7 +83,7 @@ export function Step2({ initialValues, messages: { labels, next, back }, onSubmi
                             <FormItem>
                                 <FormLabel>{labels.clientAddress}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Musterstraße 4" {...field} />
+                                    <Input  {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -96,7 +96,7 @@ export function Step2({ initialValues, messages: { labels, next, back }, onSubmi
                             <FormItem >
                                 <FormLabel>{labels.clientPostcode}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="11111 Musterstadt" {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -109,7 +109,7 @@ export function Step2({ initialValues, messages: { labels, next, back }, onSubmi
                             <FormItem>
                                 <FormLabel>{labels.clientCountry}</FormLabel>
                                 <FormControl>
-                                    <Input required placeholder="Deutschland" {...field} />
+                                    <Input required {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -125,7 +125,7 @@ export function Step2({ initialValues, messages: { labels, next, back }, onSubmi
                                 <FormItem>
                                     <FormLabel>{labels.subject}</FormLabel>
                                     <FormControl>
-                                        <Input required placeholder="Max Mustermann" {...field} />
+                                        <Input required {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -138,7 +138,7 @@ export function Step2({ initialValues, messages: { labels, next, back }, onSubmi
                                 <FormItem>
                                     <FormLabel>{labels.billNumber}</FormLabel>
                                     <FormControl>
-                                        <Input required placeholder="Musterstraße 4" {...field} />
+                                        <Input required {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

@@ -9,13 +9,23 @@ import { Button } from '../ui/button'
 
 const positionSchema = z.object({
     name: z.string().min(1),
-    amount: z.number(),
+    amount: z.string().min(1)
+        .transform((value) => parseFloat(value))
+        .refine(val => !isNaN(val), 'Must be a valid number'),
     unit: z.string().min(1),
-    price: z.number().min(1),
+    price: z.string()
+        .min(1)
+        .transform((value) => parseFloat(value))
+        .refine(val => !isNaN(val), 'Must be a valid number'),
     currency: z.string().min(1),
-    tax: z.number(),
-    discount: z.number().optional(),
-    result: z.number()
+    tax: z.string()
+        .min(1)
+        .transform((value) => parseFloat(value))
+        .refine(val => !isNaN(val), 'Must be a valid number'),
+    discount: z.string()
+        .optional()
+        .transform((value) => value ? parseFloat(value) : value)
+        .refine(val => val ? !isNaN(val as number) : true, 'Must be a valid number'),
 })
 
 const stepFourSchema = z.object({ positions: z.array(positionSchema) })
@@ -50,14 +60,12 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
     })
 
     const { isValid } = form.formState;
+    const resultRef = React.useRef<string | undefined>(undefined);
     React.useEffect(() => {
         const { unsubscribe } = form.watch(values => {
-            (values.positions?.filter(e => e) as z.infer<typeof positionSchema>[]).forEach(({ amount, price, tax, discount, result }, index) => {
+            (values.positions?.filter(e => e) as z.infer<typeof positionSchema>[]).forEach(({ amount, price, tax, discount, currency }, index) => {
                 if (![amount, price, tax, discount].some(e => e === undefined)) {
-                    const newResult = amount * price * (1 + (tax / 100)) * (1 - (discount ?? 0) / 100)
-                    if (newResult !== result) {
-                        form.setValue(`positions.${index}.result`, newResult);
-                    }
+                    resultRef.current = `${amount * price * (1 + (tax / 100)) * (1 - Number(discount ?? 0) / 100)}${currency}`;
                 }
             })
         });
@@ -73,7 +81,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                     <FormItem>
                         <FormLabel>{labels.position}</FormLabel>
                         <FormControl>
-                            <Input required placeholder="Produkt eins" {...field} />
+                            <Input required {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -87,7 +95,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                         <FormItem>
                             <FormLabel>{labels.amount}</FormLabel>
                             <FormControl>
-                                <Input required placeholder="1" {...field} />
+                                <Input required {...field} type='number' />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -100,7 +108,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                         <FormItem >
                             <FormLabel>{labels.unit}</FormLabel>
                             <FormControl>
-                                <Input required placeholder="Stück" {...field} />
+                                <Input required {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -116,7 +124,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                         <FormItem>
                             <FormLabel>{labels.netPrice}</FormLabel>
                             <FormControl>
-                                <Input required placeholder="100" {...field} />
+                                <Input required {...field} type='number' />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -129,7 +137,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                         <FormItem>
                             <FormLabel>{labels.currency}</FormLabel>
                             <FormControl>
-                                <Input required placeholder="€" {...field} />
+                                <Input required {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -145,7 +153,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                         <FormItem>
                             <FormLabel>{labels.taxPercent}</FormLabel>
                             <FormControl>
-                                <Input required placeholder="19" {...field} />
+                                <Input required {...field} type='number' />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -158,7 +166,7 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                         <FormItem>
                             <FormLabel>{labels.discountPercent}</FormLabel>
                             <FormControl>
-                                <Input placeholder="10" {...field} />
+                                <Input {...field} type='number' />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -166,19 +174,13 @@ export function Step4({ initialValues, messages: { labels, next, back }, onSubmi
                 />
             </div>
 
-            <FormField
-                control={form.control}
-                name={`positions.${0}.result`}
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>{labels.grossPrice}</FormLabel>
-                        <FormControl>
-                            <Input {...field} disabled />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+            <FormItem>
+                <FormLabel>{labels.grossPrice}</FormLabel>
+                <FormControl>
+                    <Input value={resultRef.current} disabled />
+                </FormControl>
+                <FormMessage />
+            </FormItem>
 
             <div className='mt-4 flex justify-end gap-4'>
                 <Button variant="outline" type='button' onClick={onBackClick}>{back}</Button>

@@ -62,7 +62,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.name}</FormLabel>
                                 <FormControl>
-                                    <Input required placeholder="Max Mustermann" {...field} />
+                                    <Input required {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -75,7 +75,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.street}</FormLabel>
                                 <FormControl>
-                                    <Input required placeholder="Musterstraße 4" {...field} />
+                                    <Input required {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -88,7 +88,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem >
                                 <FormLabel>{labels.zip}</FormLabel>
                                 <FormControl>
-                                    <Input required placeholder="11111 Musterstadt" {...field} />
+                                    <Input required  {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -101,7 +101,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.country}</FormLabel>
                                 <FormControl>
-                                    <Input required placeholder="Deutschland" {...field} />
+                                    <Input required {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -114,7 +114,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.email}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="max@mustermann.de" {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -127,7 +127,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.website}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="mustermann.de" {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -142,7 +142,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.bank}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Max Mustermann" {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -155,7 +155,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem>
                                 <FormLabel>{labels.IBAN}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Musterstraße 4" {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -168,7 +168,7 @@ export function Step1({ initialValues, messages: { labels, next }, onSubmit }: S
                             <FormItem >
                                 <FormLabel>{labels.BIC}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="11111 Musterstadt" {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
